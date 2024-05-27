@@ -9,7 +9,10 @@ import java.util.Scanner;
 
 public class TextClient {
     public static void main(String[] args) {
+        // se incearca deschiderea unui socket catre serverul specificat pe portul 8080
         try (Socket socket = new Socket("localhost", 8080);
+             // true argumentul în constructor asigura ca PrintWriter va face flush automat dupa fiecare operație de
+             // output, asigurand ca datele sunt trimise imediat
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              Scanner scanner = new Scanner(System.in)) {
@@ -21,6 +24,7 @@ public class TextClient {
                 String response = in.readLine();
                 System.out.println("Server response: " + response);
             }
+
 
         } catch (IOException e) {
             System.out.println("Error in client: " + e.getMessage());
